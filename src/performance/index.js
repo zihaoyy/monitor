@@ -1,4 +1,4 @@
-import fetch from "./fetch"
+import fetch from './fetch'
 import observerEntries from './observerEntries'
 import observerFCP from './observerFCP'
 import observerLCP from './observerLCP'

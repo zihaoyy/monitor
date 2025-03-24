@@ -1,15 +1,15 @@
-import {deepClone} from "./utils";
+import {deepClone} from './utils'
 
-const cache = [];
+const cache = []
 
 export function getCache() {
-    return deepClone(cache);
+    return deepClone(cache)
 }
 
 export function addCache(data) {
-    cache.push(data);
+    cache.push(data)
 }
 
 export function clearCache() {
-    cache.length = 0;
+    cache.length = 0
 }

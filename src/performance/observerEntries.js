@@ -1,23 +1,23 @@
-import {lazyReportBatch} from "../report";
+import {lazyReportBatch} from '../report'
 
 export default function obServerEntries() {
     if (document.readyState === 'complete') {
-        observeEvent();
+        observeEvent()
     } else {
         const onLoad = () => {
-            observeEvent();
-            window.removeEventListener('load', onLoad, true);
+            observeEvent()
+            window.removeEventListener('load', onLoad, true)
         }
-        window.addEventListener('load', onLoad, true);
+        window.addEventListener('load', onLoad, true)
     }
 }
 
 export function observeEvent() {
     const entryHandler = (list) => {
-        const data = list.getEntries();
+        const data = list.getEntries()
         for (const entry of data) {
             if (observer) {
-                observer.disconnect();
+                observer.disconnect()
             }
             const reportData = {
                 name: entry.name, // 资源名字
@@ -36,12 +36,11 @@ export function observeEvent() {
                 resourceSize: entry.decodedBodySize, // 资源解压后的大小
                 startTime: performance.now(),
             }
-            // 发送数据
-            lazyReportBatch(reportData);
-            console.log(entry);
+            lazyReportBatch(reportData)
+            console.log(entry)
         }
     }
 
-    let observer = new PerformanceObserver(entryHandler);
-    observer.observe({type: ['resource'], buffered: true});
+    let observer = new PerformanceObserver(entryHandler)
+    observer.observe({type: ['resource'], buffered: true})
 }

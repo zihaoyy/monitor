@@ -1,26 +1,25 @@
-import {lazyReportBatch} from "../report";
+import {lazyReportBatch} from '../report'
 
 export default function observerLCP() {
     const entryHandler = (list) => {
         if (observer) {
-            observer.disconnect();
+            observer.disconnect()
         }
         for (const entry of list.getEntries()) {
-            const json = entry.toJSON();
-            console.log(json);
+            const json = entry.toJSON()
+            console.log(json)
             const reportData = {
                 ...json,
                 type: 'performance',
                 subType: entry.name,
                 pageUrl: window.location.href,
             }
-            // 发送数据
-            lazyReportBatch(reportData);
+            lazyReportBatch(reportData)
         }
     }
 
     // 统计和计算lcp的时间
-    const observer = new PerformanceObserver(entryHandler);
+    const observer = new PerformanceObserver(entryHandler)
     // buffered: true 确保观察到所有paint事件
-    observer.observe({type: 'largest-contentful-paint', buffered: true});
+    observer.observe({type: 'largest-contentful-paint', buffered: true})
 }

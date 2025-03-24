@@ -1,5 +1,5 @@
-import {lazyReportBatch} from "../report";
-import {generateUniqueId} from "../utils";
+import {lazyReportBatch} from '../report'
+import {generateUniqueId} from '../utils'
 
 export default function pv() {
     const reportData = {
@@ -11,6 +11,5 @@ export default function pv() {
         uuid: generateUniqueId(),
     }
 
-    // 发送数据
-    lazyReportBatch(reportData);
+    lazyReportBatch(reportData)
 }

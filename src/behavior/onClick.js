@@ -1,7 +1,9 @@
-export default function click() {
+import {lazyReportBatch} from '../report'
+
+export default function onClick() {
     ['mousedown', 'touchstart'].forEach((eventType) => {
         window.addEventListener(eventType, function (event) {
-            const target = event.target;
+            const target = event.target
             if (target.tagName) {
                 const reportData = {
                     scrollTop: document.documentElement.scrollTop,
@@ -16,8 +18,7 @@ export default function click() {
                     eventType,
                     path: event.path,
                 }
-                // 发送数据
-                lazyReportBatch(reportData);
+                lazyReportBatch(reportData)
             }
         })
     })
