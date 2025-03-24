@@ -1,4 +1,4 @@
-import {lazyReportBatch} from "../report"
+import {lazyReportBatch} from '../report'
 
 export default function observerLoad() {
     window.addEventListener('pageShow', (event) => {
@@ -10,8 +10,7 @@ export default function observerLoad() {
                     pageUrl: window.location.href,
                     startTime: performance.now() - event.timeStamp,
                 }
-                // 发送数据
-                lazyReportBatch(reportData);
+                lazyReportBatch(reportData)
             })
         }, true)
     })

@@ -1,12 +1,12 @@
-import {lazyReportBatch} from "../report";
+import {lazyReportBatch} from '../report'
 
 export default function error() {
     // 捕获资源加载失败错误： js css
     window.addEventListener('error', (e) => {
-        const target = e.target;
-        if (!target) return;
+        const target = e.target
+        if (!target) return
         if (target.src || target.href) {
-            const url = target.src || target.href;
+            const url = target.src || target.href
             const reportData = {
                 type: 'error',
                 subType: 'resource',
@@ -17,10 +17,9 @@ export default function error() {
                 selector: target.outerHTML,
                 paths: e.path,
             }
-            // 发送数据
-            lazyReportBatch(reportData);
+            lazyReportBatch(reportData)
         }
-    }, true);
+    }, true)
 
     // 捕获js错误
     window.onerror = function (message, source, lineNo, colNo, error) {
@@ -35,13 +34,12 @@ export default function error() {
             stack: error.stack,
             startTime: performance.now(),
         }
-        // 发送数据
-        lazyReportBatch(reportData);
+        lazyReportBatch(reportData)
     }
 
     // 捕获promise错误 async await
     window.addEventListener('unhandledrejection', (e) => {
-        const error = e.reason;
+        const error = e.reason
         const reportData = {
             type: 'error',
             subType: 'promise',
@@ -50,7 +48,6 @@ export default function error() {
             stack: error.stack,
             startTime: e.timeStamp,
         }
-        // 发送数据
-        lazyReportBatch(reportData);
+        lazyReportBatch(reportData)
     }, true)
 }

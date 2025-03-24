@@ -1,11 +1,11 @@
-import {lazyReportBatch} from "../report";
-import {generateUniqueId} from "../utils";
+import {lazyReportBatch} from '../report'
+import {generateUniqueId} from '../utils'
 
 export default function pageChange() {
     // hash router
-    let oldUrl = '';
+    let oldUrl = ''
     window.addEventListener('hashchange', function (event) {
-        const newUrl = event.newURL;
+        const newUrl = event.newURL
         const reportData = {
             from: oldUrl,
             to: newUrl,
@@ -14,14 +14,14 @@ export default function pageChange() {
             startTime: performance.now(),
             uuid: generateUniqueId(),
         }
-        lazyReportBatch(reportData);
-        oldUrl = newUrl;
-    }, true);
+        lazyReportBatch(reportData)
+        oldUrl = newUrl
+    }, true)
 
     // history router
-    let from = '';
+    let from = ''
     window.addEventListener('popstate', function (event) {
-        const to = window.location.href;
+        const to = window.location.href
         const reportData = {
             from,
             to,
@@ -30,7 +30,7 @@ export default function pageChange() {
             startTime: performance.now(),
             uuid: generateUniqueId(),
         }
-        lazyReportBatch(reportData);
-        from = to;
-    }, true);
+        lazyReportBatch(reportData)
+        from = to
+    }, true)
 }
